@@ -171,4 +171,13 @@ window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
 });
 
+document.querySelectorAll('.certificate-link').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const pdfUrl = this.href;
+        const popup = window.open(pdfUrl, 'Certificate', 'width=800,height=600');
+        popup.focus();
+    });
+});
+
 animate();
