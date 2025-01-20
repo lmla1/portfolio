@@ -100,54 +100,6 @@ h1 {
     color: #00bfff;
 }
 
-#about-content {
-    margin-top: 60px;
-    text-align: center;
-    padding: 20px;
-    z-index: 1;
-    position: relative;
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.about-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    color: #f0f0f0;
-    gap: 20px;
-}
-
-.about-photo {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    border-radius: 15px;
-    object-fit: cover;
-}
-
-.about-text {
-    max-width: 600px;
-    text-align: left;
-    width: 100%;
-}
-
-.about-text h2 {
-    color: #00bfff;
-}
-
-.github-icon {
-    width: 40px;
-    height: 40px;
-    margin-top: 20px;
-    transition: transform 0.3s;
-}
-
-.github-icon:hover {
-    transform: scale(1.1);
-}
-
-
 #resume-content {
     margin-top: 60px;
     text-align: center;
@@ -258,6 +210,76 @@ h1 {
 @keyframes slideDown {
     from { top: -50px; }
     to { top: 0; }
+}
+
+#about-content {
+    margin-top: 60px;
+    text-align: center;
+    padding: 20px;
+    z-index: 1;
+    position: relative;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    color: #f0f0f0;
+    gap: 20px;
+}
+
+.about-photo {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.about-text {
+    max-width: 600px;
+    text-align: left;
+    width: 100%;
+}
+
+.about-text h2 {
+    color: #00bfff;
+}
+
+.github-icon {
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    transition: transform 0.3s;
+}
+
+.github-icon:hover {
+    transform: scale(1.1);
+}
+
+#certificates {
+    margin-top: 40px;
+}
+
+.certificate-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.certificate-thumbnail {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.certificate-thumbnail:hover {
+    transform: scale(1.1);
 }
 
 /* Media queries for different screen sizes */
