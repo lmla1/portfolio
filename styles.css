@@ -272,13 +272,13 @@ h1 {
 }
 
 .certificate-thumbnail {
-    width: 100px; /* Adjust the width as needed */
+    width: 100px;
     height: auto;
-    max-height: 140px; /* Adjust the height as needed */
+    max-height: 140px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s;
-    object-fit: cover; /* Ensure the image fits within the specified dimensions */
+    object-fit: cover;
 }
 
 .certificate-thumbnail:hover {
@@ -287,6 +287,11 @@ h1 {
 
 /* Media queries for different screen sizes */
 @media (max-width: 768px) {
+    .certificate-thumbnail {
+        width: 80px; /* Adjust the width for smaller screens */
+        max-height: 120px; /* Adjust the height for smaller screens */
+    }
+
     h1 {
         font-size: 8vw;
     }
@@ -349,6 +354,13 @@ h1 {
 
     .email {
         font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .certificate-thumbnail {
+        width: 60px; /* Adjust the width for very small screens */
+        max-height: 100px; /* Adjust the height for very small screens */
     }
 }
 
