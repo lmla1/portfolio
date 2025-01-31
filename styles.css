@@ -26,9 +26,10 @@ canvas {
     color: #f0f0f0;
     animation: fadeIn 1s ease-in-out;
     z-index: 1;
-    padding: 20px;
+    padding: 10px;
     width: 90%;
     max-width: 800px;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 h1 {
@@ -45,37 +46,73 @@ h1 {
 }
 
 .intro {
-    font-size: 20px;
-    margin: 15px 0;
+    font-size: 17px;
+    margin: 20px 0;
     color: #87cefa;
     animation: fadeIn 1s ease-in-out;
 }
 
 .motivation {
-    font-size: 1.1vw;
+    font-size: 1.2 vw;
     margin: 10px 0;
     color: #87cefa;
 }
 
+/* Navigation Links */
 .sections {
-    margin: 20px 0;
+    margin: 30px 0;
+    position: relative;
+    padding: 20px 0;
+}
+
+.sections::before,
+.sections::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #87cefa, transparent);
+}
+
+.sections::before {
+    top: 0;
+}
+
+.sections::after {
+    bottom: 0;
 }
 
 .sections a {
     color: #f0f0f0;
     text-decoration: none;
-    margin: 0 10px;
-    font-size: 1.2vw;
-    transition: color 0.3s;
+    margin: 0 15px;
+    font-size: 1.3vw; /* Larger font size */
+    font-weight: 200;
+    transition: color 0.3s, transform 0.3s;
 }
 
 .sections a:hover {
     color: #00bfff;
+    transform: translateY(-3px);
 }
 
 .sections span {
     color: #f0f0f0;
     margin: 0 10px;
+    font-weight: 200;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from { top: -50px; }
+    to { top: 0; }
 }
 
 #navbar {
