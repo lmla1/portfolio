@@ -249,13 +249,19 @@ h1 {
     color: #00bfff;
 }
 
+.social-icons {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
 .github-icon {
     width: 40px;
     height: 40px;
     margin-top: 20px;
+    margin-right: 0;
     transition: transform 0.3s;
 }
-
 .github-icon:hover {
     transform: scale(1.1);
 }
@@ -288,8 +294,8 @@ h1 {
 /* Media queries for different screen sizes */
 @media (max-width: 768px) {
     .certificate-thumbnail {
-        width: 80px; /* Adjust the width for smaller screens */
-        max-height: 120px; /* Adjust the height for smaller screens */
+        width: 80px;
+        max-height: 120px;
     }
 
     h1 {
@@ -359,9 +365,7 @@ h1 {
 
 @media (max-width: 480px) {
     .certificate-thumbnail {
-        width: 60px; /* Adjust the width for very small screens */
-        max-height: 100px; /* Adjust the height for very small screens */
+        width: 60px;
+        max-height: 100px;
     }
 }
-
-
