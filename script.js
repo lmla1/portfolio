@@ -19,7 +19,6 @@ class Star {
         ctx.fillStyle = 'white';
         ctx.beginPath();
 
-        // Draw a pointy star
         const spikes = 5; // Number of spikes
         const outerRadius = this.size;
         const innerRadius = this.size / 2;
@@ -114,14 +113,11 @@ class Circle {
             const dy = star.y - this.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            // Smooth control points for the quadratic curve
             const controlX = (this.x + star.x) / 2 + (mouse.x - this.x) * 0.2 * (index % 4 === 0 ? -1 : 1);
             const controlY = (this.y + star.y) / 2 + (mouse.y - this.y) * 0.2 * (index % 4 === 0 ? -1 : 1);
 
-            // Dynamic line width based on distance
             const lineWidth = 1 + (1 - distance / tentacleLength) * 2;
 
-            // Gradient for smoother color transition
             const gradient = ctx.createLinearGradient(this.x, this.y, star.x, star.y);
             gradient.addColorStop(0, this.color);
             gradient.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
@@ -148,7 +144,7 @@ const circle = new Circle();
 
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    stars.forEach(star => star.draw()); // Draw static stars
+    stars.forEach(star => star.draw());
     circle.update();
     circle.draw();
     circle.drawTentacles();
@@ -172,3 +168,93 @@ window.addEventListener('resize', () => {
 });
 
 animate();
+
+function unlockEgg() {
+    const answer = prompt("Decode this: bHVpcw==\nHint: Base64");
+    if (answer === "luis") {
+        window.location.href = "/challenge.html";
+    } else {
+        alert("SyntaxError: Invalid answer. Check the console for hints!");
+    }
+}
+
+function showTerminalAnimation(containerId) {
+    const challengeContainer = document.getElementById(containerId);
+    challengeContainer.style.display = 'none';
+  
+    const terminal = document.createElement('div');
+    terminal.id = "secret-terminal";
+    terminal.innerHTML = `
+      <pre id="terminal-output"></pre>
+      <div class="cursor">_</div>
+      <button id="close-terminal" style="margin-top: 10px;">Close Terminal</button>
+    `;
+    document.body.appendChild(terminal);
+  
+    document.getElementById('close-terminal').addEventListener('click', () => {
+      document.getElementById('secret-terminal').remove();
+      challengeContainer.style.display = 'block';
+    });
+  
+    const messages = [
+      "> Initializing secret terminal...",
+      "> Access granted!",
+      "> Welcome to the debugger's club!",
+      "> Want to see something cool? Check my GitHub: <a href='https://github.com/lmla1' target='_blank' style='color: #00ff00;'>https://github.com/lmla1</a>"
+    ];
+  
+    let index = 0;
+    function typeMessage() {
+      if (index < messages.length) {
+        document.getElementById('terminal-output').innerHTML += messages[index] + '\n';
+        index++;
+        setTimeout(typeMessage, 1500);
+      } else {
+        addCommandPrompt();
+      }
+    }
+    typeMessage();
+  }
+  
+  function addCommandPrompt() {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.id = 'terminal-input';
+    input.placeholder = "Type a command...";
+    document.getElementById('secret-terminal').appendChild(input);
+    
+    input.focus();
+  
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const command = input.value.trim().toLowerCase();
+        handleCommand(command);
+        input.value = '';
+      }
+    });
+  }
+
+function handleCommand(command) {
+    const output = document.getElementById('terminal-output');
+    switch (command) {
+        case 'help':
+            output.innerHTML += "> Available commands: help, about, clear\n";
+            break;
+        case 'about':
+            output.innerHTML += "> I'm Luis, a developer who loves building cool things!\n";
+            break;
+        case 'clear':
+            output.innerHTML = ''; // Clear terminal
+            break;
+        default:
+            output.innerHTML += `> Unknown command: ${command}\n`;
+    }
+}
+
+console.log("Up for a challenge?\ntype unlockEgg()");
+
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+        unlockEgg();
+    }
+});
