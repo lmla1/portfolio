@@ -325,4 +325,24 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.style.backgroundColor = '#555';
         }
     }
+
+    const consoleHint = document.getElementById('console-hint');
+    
+    if (consoleHint) {
+        consoleHint.addEventListener('click', function() {
+            // Add a little animation when clicked
+            this.style.transform = 'translateX(-10px)';
+            setTimeout(() => {
+                this.style.transform = 'translateX(0)';
+            }, 200);
+            
+            // Log a message to the console
+            console.log('%c👋 Psst... looking for something?', 'font-size: 16px; color: #00ff00;');
+            console.log('%cTry typing %cunlockEgg()%c in the console!', 
+                'color: #aaa;', 
+                'color: #00ff00; font-weight: bold;', 
+                'color: #aaa;');
+        });
+    }
+
 });

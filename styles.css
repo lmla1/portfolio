@@ -518,6 +518,43 @@ h1 {
     background: #6e5494;
 }
 
+#console-hint {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#console-hint:hover {
+    opacity: 0.8;
+}
+
+.console-text {
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.console-caret {
+    width: 8px;
+    height: 16px;
+    background-color: #00ff00;
+    animation: blink 1s infinite;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
 #email-reveal {
     position: relative;
     display: flex;
