@@ -132,7 +132,6 @@ class Circle {
     }
 }
 
-// Create stars
 for (let i = 0; i < starCount; i++) {
     const size = Math.random() * 2 + 1;
     const x = Math.random() * canvas.width;
@@ -165,12 +164,24 @@ canvas.addEventListener('mouseleave', () => {
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    
+    stars.length = 0;
+    for (let i = 0; i < starCount; i++) {
+        const size = Math.random() * 2 + 1;
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        stars.push(new Star(x, y, size));
+    }
+    
+    circle.x = Math.random() * canvas.width;
+    circle.y = Math.random() * canvas.height;
 });
 
 animate();
 
 function unlockEgg() {
     const answer = prompt("Decode this: bHVpcw==\nHint: Base64");
+    console.log("Decode this: bHVpcw==\nHint: Base64");
     if (answer === "luis") {
         window.location.href = "/challenge.html";
     } else {
@@ -197,21 +208,39 @@ function showTerminalAnimation(containerId) {
     });
   
     const messages = [
-      "> Initializing secret terminal...",
-      "> Access granted!",
-      "> Welcome to the debugger's club!",
-      "> Want to see something cool? Check my GitHub: <a href='https://github.com/lmla1' target='_blank' style='color: #00ff00;'>https://github.com/lmla1</a>"
+        "> Initializing secret terminal...",
+        "> Access granted!",
+        "> Welcome to the debugger's club!",
+        "> Want to see something cool? Check my GitHub:"
     ];
-  
+
     let index = 0;
     function typeMessage() {
-      if (index < messages.length) {
-        document.getElementById('terminal-output').innerHTML += messages[index] + '\n';
-        index++;
-        setTimeout(typeMessage, 1500);
-      } else {
-        addCommandPrompt();
-      }
+        if (index < messages.length) {
+            const output = document.getElementById('terminal-output');
+            const message = messages[index];
+            
+            if (index === 3) {
+                const textNode = document.createTextNode(message + " ");
+                const link = document.createElement('a');
+                link.href = 'https://github.com/lmla1';
+                link.target = '_blank';
+                link.style.color = '#00ff00';
+                link.textContent = 'https://github.com/lmla1';
+                
+                output.appendChild(textNode);
+                output.appendChild(link);
+                output.appendChild(document.createElement('br'));
+            } else {
+                const node = document.createTextNode(message + '\n');
+                output.appendChild(node);
+            }
+            
+            index++;
+            setTimeout(typeMessage, 1500);
+        } else {
+            addCommandPrompt();
+        }
     }
     typeMessage();
   }
@@ -226,29 +255,36 @@ function showTerminalAnimation(containerId) {
     input.focus();
   
     input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const command = input.value.trim().toLowerCase();
-        handleCommand(command);
-        input.value = '';
-      }
+        if (e.key === 'Enter') {
+            const output = document.getElementById('terminal-output');
+            const command = document.createTextNode(`> ${input.value}\n`);
+            output.appendChild(command);
+            handleCommand(input.value.trim());
+            input.value = '';
+        }
     });
   }
 
-function handleCommand(command) {
+  function handleCommand(command) {
     const output = document.getElementById('terminal-output');
-    switch (command) {
+    const sanitizedCommand = document.createTextNode(command).textContent;
+    
+    switch (sanitizedCommand.toLowerCase()) {
         case 'help':
-            output.innerHTML += "> Available commands: help, about, clear\n";
+            output.appendChild(document.createTextNode('> Available commands: help, about, clear\n'));
             break;
         case 'about':
-            output.innerHTML += "> I'm Luis, a developer who loves building cool things!\n";
+            output.appendChild(document.createTextNode("> I'm Luis, a developer who loves building cool things!\n"));
             break;
         case 'clear':
-            output.innerHTML = ''; // Clear terminal
+            output.textContent = '';
             break;
         default:
-            output.innerHTML += `> Unknown command: ${command}\n`;
+            const message = document.createTextNode(`> Unknown command: ${sanitizedCommand}\n`);
+            output.appendChild(message);
     }
+    
+    output.appendChild(document.createElement('br'));
 }
 
 console.log("Up for a challenge?\ntype unlockEgg()");
@@ -258,3 +294,33 @@ document.addEventListener('keydown', (e) => {
         unlockEgg();
     }
 });
+
+function revealEmail() {
+    // Split email into parts and combine when needed
+    const parts = [
+        'luis.lopez',
+        '2m1w',
+        '@gmail.com'
+    ];
+    const email = parts[0] + parts[1] + parts[2];
+    
+    // Display the email
+    document.getElementById('dynamic-email').textContent = email;
+    document.getElementById('email-container').style.display = 'block';
+    
+    // Create a mailto link
+    const mailtoLink = document.createElement('a');
+    mailtoLink.href = `mailto:${email}`;
+    mailtoLink.textContent = ' (Send Email)';
+    mailtoLink.style.color = '#00bfff';
+    mailtoLink.style.marginLeft = '10px';
+    document.getElementById('dynamic-email').appendChild(mailtoLink);
+    
+    // Disable the button after first click
+    const btn = document.getElementById('reveal-email-btn');
+    btn.textContent = 'Email Revealed!';
+    btn.disabled = true;
+    btn.style.backgroundColor = '#555';
+}
+
+document.getElementById('reveal-email-btn').addEventListener('click', revealEmail);
