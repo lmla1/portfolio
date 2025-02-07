@@ -295,32 +295,34 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function revealEmail() {
-    // Split email into parts and combine when needed
-    const parts = [
-        'luis.lopez',
-        '2m1w',
-        '@gmail.com'
-    ];
-    const email = parts[0] + parts[1] + parts[2];
+document.addEventListener('DOMContentLoaded', function() {
+    const emailButton = document.getElementById('reveal-email-btn');
     
-    // Display the email
-    document.getElementById('dynamic-email').textContent = email;
-    document.getElementById('email-container').style.display = 'block';
-    
-    // Create a mailto link
-    const mailtoLink = document.createElement('a');
-    mailtoLink.href = `mailto:${email}`;
-    mailtoLink.textContent = ' (Send Email)';
-    mailtoLink.style.color = '#00bfff';
-    mailtoLink.style.marginLeft = '10px';
-    document.getElementById('dynamic-email').appendChild(mailtoLink);
-    
-    // Disable the button after first click
-    const btn = document.getElementById('reveal-email-btn');
-    btn.textContent = 'Email Revealed!';
-    btn.disabled = true;
-    btn.style.backgroundColor = '#555';
-}
-
-document.getElementById('reveal-email-btn').addEventListener('click', revealEmail);
+    if (emailButton) {
+        emailButton.addEventListener('click', revealEmail);
+        
+        function revealEmail() {
+            const parts = [
+                'luis.lopez',
+                '2m1w',
+                '@gmail.com'
+            ];
+            const email = parts[0] + parts[1] + parts[2];
+            
+            document.getElementById('dynamic-email').textContent = email;
+            document.getElementById('email-container').style.display = 'block';
+            
+            const mailtoLink = document.createElement('a');
+            mailtoLink.href = `mailto:${email}`;
+            mailtoLink.textContent = ' (Send Email)';
+            mailtoLink.style.color = '#00bfff';
+            mailtoLink.style.marginLeft = '10px';
+            document.getElementById('dynamic-email').appendChild(mailtoLink);
+            
+            const btn = document.getElementById('reveal-email-btn');
+            btn.textContent = 'Email Revealed!';
+            btn.disabled = true;
+            btn.style.backgroundColor = '#555';
+        }
+    }
+});
